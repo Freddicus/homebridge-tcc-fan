@@ -1,7 +1,7 @@
 {
   "name": "homebridge-tcc-fan",
-  "version": "0.0.24",
-  "description": "Honeywell Total Connect Comfort Fan support for Homebridge: https://github.com/nfarina/homebridge. Alfred's fork with other fan mode switches.",
+  "version": "1.0.0",
+  "description": "Honeywell Total Connect Comfort Fan support for Homebridge - Alfred's fork with other fan mode switches.",
   "license": "ISC",
   "keywords": [
     "homebridge-plugin",
