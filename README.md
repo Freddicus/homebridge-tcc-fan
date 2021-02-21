@@ -1,8 +1,10 @@
-# homebridge-tcc-fan
+# homebridge-tcc-fan-plus
 
 Forked from https://github.com/hacctarr/homebridge-tcc-fan
 
 See README there: https://github.com/hacctarr/homebridge-tcc-fan/blob/master/README.md
+
+Install locally with: `sudo npm link`
 
 # New in this fork
 

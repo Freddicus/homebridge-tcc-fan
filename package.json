@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-tcc-fan",
+  "name": "homebridge-tcc-fan-plus",
   "version": "1.0.0",
   "description": "Honeywell Total Connect Comfort Fan support for Homebridge - Alfred's fork with other fan mode switches.",
   "license": "ISC",
