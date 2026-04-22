@@ -5,6 +5,9 @@
   "description": "Honeywell Total Connect Comfort Fan support for Homebridge - Alfred's fork with other fan mode switches.",
   "license": "ISC",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
   "keywords": [
     "homebridge-plugin",
     "tcc",
