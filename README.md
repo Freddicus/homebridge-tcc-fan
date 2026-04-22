@@ -6,10 +6,33 @@ Forked from [hacctarr/homebridge-tcc-fan](https://github.com/hacctarr/homebridge
 
 ## Installation
 
-Install via the Homebridge UI, or manually:
+Install via the Homebridge UI, or manually on the machine running Homebridge:
 
 ```sh
 npm install -g homebridge-tcc-fan-plus
+```
+
+> **Note for hb-service installs (Raspberry Pi, Linux):** Homebridge bundles its own Node.js and npm that are not on the system PATH. Use the bundled npm and install into the Homebridge storage directory instead:
+> ```sh
+> cd /var/lib/homebridge
+> sudo PATH=/opt/homebridge/bin:$PATH /opt/homebridge/bin/npm install homebridge-tcc-fan-plus
+> sudo systemctl restart homebridge.service
+> ```
+
+### Installing a local or pre-release version for testing
+
+If you are testing from a Git branch before publishing to npm:
+
+```sh
+cd /var/lib/homebridge
+sudo PATH=/opt/homebridge/bin:$PATH /opt/homebridge/bin/npm install github:Freddicus/homebridge-tcc-fan#modernize
+sudo systemctl restart homebridge.service
+```
+
+Watch the logs to confirm the plugin loaded:
+
+```sh
+sudo journalctl -u homebridge.service -f
 ```
 
 ## Configuration
@@ -23,11 +46,10 @@ Add a platform entry to your Homebridge `config.json`:
   "username": "your@email.com",
   "password": "yourpassword",
   "refresh": 60,
-  "showFanControl": true,
-  "showAuto": false,
-  "showOn": false,
-  "showCirculate": false,
-  "showFollowSchedule": false,
+  "showAuto": true,
+  "showOn": true,
+  "showCirculate": true,
+  "showFollowSchedule": true,
   "devices": [
     { "deviceID": "123456789", "name": "Main Floor" },
     { "deviceID": "987654321", "name": "Upper Floor" }
@@ -44,20 +66,22 @@ Add a platform entry to your Homebridge `config.json`:
 | `devices` | array | required | List of `{ deviceID, name }` objects |
 | `refresh` | integer | `60` | Seconds between state updates |
 | `debug` | boolean | `false` | Enable verbose logging |
-| `showFanControl` | boolean | `true` | Show main On/Off fan control (On = On, Off = Auto) |
-| `showAuto` | boolean | `false` | Show a momentary switch for Auto fan mode |
-| `showOn` | boolean | `false` | Show a momentary switch for On fan mode |
-| `showCirculate` | boolean | `false` | Show a momentary switch for Circulate fan mode |
-| `showFollowSchedule` | boolean | `false` | Show a momentary switch for Follow Schedule fan mode |
+| `showAuto` | boolean | `true` | Show Auto mode switch |
+| `showOn` | boolean | `true` | Show On mode switch |
+| `showCirculate` | boolean | `true` | Show Circulate mode switch |
+| `showFollowSchedule` | boolean | `true` | Show Follow Schedule mode switch |
+| `showFanControl` | boolean | `false` | Show legacy On/Off fan toggle (On = mode 1, Off = Auto) |
 
 ### Fan Modes
 
-| TCC Mode | Value |
-|---|---|
-| Auto | 0 |
-| On | 1 |
-| Circulate | 2 |
-| Follow Schedule | 3 |
+All four TCC fan modes are exposed as stateful HomeKit switches. Exactly one switch is on at a time, reflecting the current mode. Tapping a switch activates that mode; the others turn off automatically.
+
+| TCC Mode | Value | Switch |
+|---|---|---|
+| Auto | 0 | Auto |
+| On | 1 | On |
+| Circulate | 2 | Circulate |
+| Follow Schedule | 3 | Follow Schedule |
 
 ## Requirements
 
