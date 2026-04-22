@@ -33,29 +33,34 @@
         "default": false
       },
       "showFanControl": {
-        "title": "Show Fan On/Off Control",
+        "title": "Show Legacy On/Off Fan Toggle",
+        "description": "Simple on/off switch (On = mode 1, Off = Auto). Disabled by default in favour of the four mode switches below.",
         "type": "boolean",
-        "default": true
+        "default": false
       },
       "showAuto": {
         "title": "Show Auto Mode Switch",
+        "description": "Stateful switch — on when fan is in Auto mode.",
         "type": "boolean",
-        "default": false
+        "default": true
       },
       "showOn": {
         "title": "Show On Mode Switch",
+        "description": "Stateful switch — on when fan is forced on.",
         "type": "boolean",
-        "default": false
+        "default": true
       },
       "showCirculate": {
         "title": "Show Circulate Mode Switch",
+        "description": "Stateful switch — on when fan is in Circulate mode.",
         "type": "boolean",
-        "default": false
+        "default": true
       },
       "showFollowSchedule": {
         "title": "Show Follow Schedule Mode Switch",
+        "description": "Stateful switch — on when fan is following its schedule.",
         "type": "boolean",
-        "default": false
+        "default": true
       },
       "devices": {
         "title": "Devices",
