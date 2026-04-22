@@ -1,0 +1,82 @@
+{
+  "pluginAlias": "tcc-fan",
+  "pluginType": "platform",
+  "singular": false,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "TCC Fan",
+        "required": true
+      },
+      "username": {
+        "title": "TCC Username / Email",
+        "type": "string",
+        "required": true
+      },
+      "password": {
+        "title": "TCC Password",
+        "type": "string",
+        "required": true
+      },
+      "refresh": {
+        "title": "Refresh Interval (seconds)",
+        "type": "integer",
+        "default": 60,
+        "minimum": 10
+      },
+      "debug": {
+        "title": "Enable Debug Logging",
+        "type": "boolean",
+        "default": false
+      },
+      "showFanControl": {
+        "title": "Show Fan On/Off Control",
+        "type": "boolean",
+        "default": true
+      },
+      "showAuto": {
+        "title": "Show Auto Mode Switch",
+        "type": "boolean",
+        "default": false
+      },
+      "showOn": {
+        "title": "Show On Mode Switch",
+        "type": "boolean",
+        "default": false
+      },
+      "showCirculate": {
+        "title": "Show Circulate Mode Switch",
+        "type": "boolean",
+        "default": false
+      },
+      "showFollowSchedule": {
+        "title": "Show Follow Schedule Mode Switch",
+        "type": "boolean",
+        "default": false
+      },
+      "devices": {
+        "title": "Devices",
+        "type": "array",
+        "required": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "deviceID": {
+              "title": "Device ID",
+              "type": "string",
+              "required": true
+            },
+            "name": {
+              "title": "Device Name",
+              "type": "string",
+              "required": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
