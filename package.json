@@ -1,8 +1,13 @@
 {
   "name": "homebridge-tcc-fan-plus",
-  "version": "1.0.1",
+  "displayName": "TCC Fan Plus",
+  "version": "2.0.0",
   "description": "Honeywell Total Connect Comfort Fan support for Homebridge - Alfred's fork with other fan mode switches.",
   "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
   "keywords": [
     "homebridge-plugin",
     "tcc",
@@ -16,12 +21,15 @@
     "url": "https://github.com/Freddicus/homebridge-tcc-fan/issues"
   },
   "engines": {
-    "node": ">=0.12.0",
-    "homebridge": ">=0.4.16"
+    "node": ">=18.15.0",
+    "homebridge": "^1.8.0 || ^2.0.0-beta.0"
   },
   "dependencies": {
-    "lodash": "~2.4.1",
-    "q": "~1.0.1",
-    "request": "~2.34.0"
+    "axios": "^1.7.0",
+    "axios-cookiejar-support": "^2.0.0",
+    "tough-cookie": "^4.1.0"
+  },
+  "devDependencies": {
+    "homebridge": "^2.0.0-beta.0"
   }
 }

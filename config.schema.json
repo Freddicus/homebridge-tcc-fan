@@ -1,0 +1,87 @@
+{
+  "pluginAlias": "tcc-fan",
+  "pluginType": "platform",
+  "singular": false,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "TCC Fan",
+        "required": true
+      },
+      "username": {
+        "title": "TCC Username / Email",
+        "type": "string",
+        "required": true
+      },
+      "password": {
+        "title": "TCC Password",
+        "type": "string",
+        "required": true
+      },
+      "refresh": {
+        "title": "Refresh Interval (seconds)",
+        "type": "integer",
+        "default": 60,
+        "minimum": 10
+      },
+      "debug": {
+        "title": "Enable Debug Logging",
+        "type": "boolean",
+        "default": false
+      },
+      "showFanControl": {
+        "title": "Show Legacy On/Off Fan Toggle",
+        "description": "Simple on/off switch (On = mode 1, Off = Auto). Disabled by default in favour of the four mode switches below.",
+        "type": "boolean",
+        "default": false
+      },
+      "showAuto": {
+        "title": "Show Auto Mode Switch",
+        "description": "Stateful switch — on when fan is in Auto mode.",
+        "type": "boolean",
+        "default": true
+      },
+      "showOn": {
+        "title": "Show On Mode Switch",
+        "description": "Stateful switch — on when fan is forced on.",
+        "type": "boolean",
+        "default": true
+      },
+      "showCirculate": {
+        "title": "Show Circulate Mode Switch",
+        "description": "Stateful switch — on when fan is in Circulate mode.",
+        "type": "boolean",
+        "default": true
+      },
+      "showFollowSchedule": {
+        "title": "Show Follow Schedule Mode Switch",
+        "description": "Stateful switch — on when fan is following its schedule.",
+        "type": "boolean",
+        "default": true
+      },
+      "devices": {
+        "title": "Devices",
+        "type": "array",
+        "required": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "deviceID": {
+              "title": "Device ID",
+              "type": "string",
+              "required": true
+            },
+            "name": {
+              "title": "Device Name",
+              "type": "string",
+              "required": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
