@@ -205,18 +205,34 @@ tccAccessory.prototype.setFanMode = function(mode, callback) {
 
     that.log('Setting fan mode for', this.name, 'to', mode);
 
-    tcc.login(this.username, this.password).then(function(newSession) {
-        return newSession.setFanSwitch(that.deviceID, mode);
-    }).then(function(taskId) {
-        that.log('Fan mode set successfully', taskId);
-        updating = false;
-        updateValues(that);
-        callback(null);
-    }).catch(function(err) {
-        that.log('setFanMode failed:', err);
-        updating = false;
-        callback(err);
-    });
+    // Use the existing session — no need to re-login on every tap.
+    // Only re-login if the request fails (e.g. session expired).
+    session.setFanSwitch(that.deviceID, mode)
+        .then(function() {
+            that.log('Fan mode set to', mode);
+            updating = false;
+            updateValues(that);
+            callback(null);
+        })
+        .catch(function(err) {
+            that.log('setFanMode failed, attempting re-login:', err.message || err);
+            tcc.login(that.username, that.password)
+                .then(function(newSession) {
+                    session = newSession;
+                    return session.setFanSwitch(that.deviceID, mode);
+                })
+                .then(function() {
+                    that.log('Fan mode set to', mode, '(after re-login)');
+                    updating = false;
+                    updateValues(that);
+                    callback(null);
+                })
+                .catch(function(retryErr) {
+                    that.log('setFanMode failed after re-login:', retryErr.message || retryErr);
+                    updating = false;
+                    callback(retryErr);
+                });
+        });
 };
 
 tccAccessory.prototype.getServices = function() {
