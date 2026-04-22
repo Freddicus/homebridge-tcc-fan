@@ -1,7 +1,8 @@
-# Publishes to npm when a GitHub Release is created.
+# Publishes to npm when a GitHub Release is published.
 # Uses npm Trusted Publishing (OIDC) — no stored npm token required.
 # Setup: npmjs.com → package → Settings → Publishing → Add trusted publisher
-#   Owner: Freddicus | Repo: homebridge-tcc-fan | Workflow: npm-publish.yml
+#   Owner: freddicus | Repo: homebridge-tcc-fan | Workflow: npm-publish.yml
+# Requires: npm CLI >= 11.5.1 (upgraded explicitly below)
 
 name: Node.js Package
 
@@ -25,11 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+      # npm >= 11.5.1 required for trusted publishing OIDC token exchange
+      - run: npm install -g npm@latest
       - run: npm ci
-      - run: npm publish --provenance --access public
+      - run: npm publish
