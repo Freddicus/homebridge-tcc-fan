@@ -268,6 +268,8 @@ tccAccessory.prototype.getServices = function() {
         if (!this[key]) return;
 
         const svc = new Service.Switch(name, subtype);
+        svc.setCharacteristic(Characteristic.Name, name);
+        svc.setCharacteristic(Characteristic.ConfiguredName, name);
 
         svc.getCharacteristic(Characteristic.On)
             .on('get', cb => cb(null, this.getCurrentMode() === mode))
